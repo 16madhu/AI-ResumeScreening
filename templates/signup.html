@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | ResumeScope</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="auth-page">
+  <div class="auth-brand-panel">
+    <div class="auth-brand">
+      <div class="auth-brand-icon">🪄</div>
+      <div class="auth-brand-content">
+        <div class="eyebrow">ResumeScope</div>
+        <h1>Create your account</h1>
+        <p>Start using AI‑powered resume analysis today.</p>
+      </div>
+    </div>
+    <div class="auth-brand-footer">© 2024 ResumeScope</div>
+  </div>
+  <div class="auth-form-panel">
+    <div class="auth-card">
+      <h2>Sign Up</h2>
+      <div class="auth-subtitle">Enter your details to register.</div>
+      <form id="signup-form">
+        <div class="auth-field">
+          <label for="username">Full Name</label>
+          <input type="text" id="username" name="username" autocomplete="name" minlength="2" required>
+        </div>
+        <div class="auth-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" required>
+        </div>
+        <div class="auth-field">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" autocomplete="new-password" required minlength="8">
+          <button type="button" class="password-toggle" data-target="password" aria-label="Show password" aria-pressed="false">Show</button>
+        </div>
+        <button type="submit" class="auth-submit">Create Account</button>
+      </form>
+      <div class="auth-message" id="msg" role="status" aria-live="polite"></div>
+      <div class="auth-switch">Already have an account? <a href="{{ url_for('login_page') }}">Sign In</a></div>
+    </div>
+  </div>
+</div>
+<script src="{{ url_for('static', filename='js/auth.js') }}" defer></script>
+</body>
+</html>

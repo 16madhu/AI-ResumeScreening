@@ -1,0 +1,171 @@
+[
+  {
+    "id": 1,
+    "title": "Machine Learning Engineer",
+    "domain": "Machine Learning",
+    "description": "Design, build, and deploy production machine learning models and pipelines. Experience with Python, Machine Learning, Deep Learning, PyTorch or TensorFlow, and Scikit-Learn. Knowledge of data preprocessing, feature engineering, and model evaluation in cloud environments.",
+    "required_skills": [
+      "Python",
+      "Machine Learning",
+      "Deep Learning",
+      "PyTorch",
+      "Scikit-Learn",
+      "Data Science"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Data Scientist",
+    "domain": "Data Science",
+    "description": "Extract actionable insights using statistical modeling and machine learning algorithms. Proficient in Python, SQL, Statistics, Data Analysis, and predictive modeling. Experience with Pandas, NumPy, and communicating data findings to stakeholders.",
+    "required_skills": [
+      "Python",
+      "SQL",
+      "Statistics",
+      "Data Analysis",
+      "Machine Learning",
+      "Pandas"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Data Analyst",
+    "domain": "Data Analytics",
+    "description": "Analyze complex datasets to identify trends, create dashboards, and drive business decision-making. Strong expertise in SQL, Data Visualization, Power BI or Tableau, Statistics, and Data Analysis. Experience in querying relational databases and reporting.",
+    "required_skills": [
+      "SQL",
+      "Data Analysis",
+      "Data Visualization",
+      "Power BI",
+      "Tableau",
+      "Statistics"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Python Developer",
+    "domain": "Software Engineering",
+    "description": "Develop scalable backend systems, RESTful APIs, and database services using Python, Flask or Django, and SQL. Familiarity with Git version control, Docker containerization, unit testing, and relational database design.",
+    "required_skills": [
+      "Python",
+      "Flask",
+      "Django",
+      "SQL",
+      "Git",
+      "Docker"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Web Developer",
+    "domain": "Web Development",
+    "description": "Build responsive and modern web applications. Strong command of JavaScript, HTML, CSS, React, and REST APIs. Experience with Node.js, version control with Git, and frontend state management.",
+    "required_skills": [
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "React",
+      "Node.js",
+      "Git"
+    ]
+  },
+  {
+    "id": 6,
+    "title": "DevOps Engineer",
+    "domain": "Cloud & Infrastructure",
+    "description": "Automate cloud infrastructure provisioning, CI/CD pipelines, container orchestration, and monitoring. Hands-on expertise with Docker, Kubernetes, CI/CD, AWS or Azure, Terraform, and Linux administration.",
+    "required_skills": [
+      "Docker",
+      "Kubernetes",
+      "CI/CD",
+      "AWS",
+      "Cloud Computing",
+      "Git",
+      "Linux"
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Cloud Architect",
+    "domain": "Cloud Computing",
+    "description": "Design high-availability, scalable multi-cloud enterprise architectures. Deep experience with AWS, Azure, Cloud Computing, microservices architecture, network security, and cost optimization.",
+    "required_skills": [
+      "Cloud Computing",
+      "AWS",
+      "Azure",
+      "Docker",
+      "Kubernetes",
+      "Linux"
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Cybersecurity Analyst",
+    "domain": "Information Security",
+    "description": "Protect critical infrastructure from threats, conduct vulnerability assessments, manage incident response, and enforce security policies. Skilled in Network Security, Penetration Testing, Linux, and Cloud Security.",
+    "required_skills": [
+      "Cyber Security",
+      "Network Security",
+      "Linux",
+      "Penetration Testing",
+      "Cloud Computing"
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Full Stack Developer",
+    "domain": "Software Engineering",
+    "description": "Deliver end-to-end web applications combining robust backend services with modern responsive frontends. Skilled in JavaScript, React, Node.js, Python, SQL databases, and RESTful API architecture.",
+    "required_skills": [
+      "JavaScript",
+      "React",
+      "Node.js",
+      "Python",
+      "SQL",
+      "HTML",
+      "CSS",
+      "Git"
+    ]
+  },
+  {
+    "id": 10,
+    "title": "NLP Engineer",
+    "domain": "Artificial Intelligence",
+    "description": "Build state-of-the-art Natural Language Processing models, text classification, named entity recognition, and LLM applications. Proficient in Python, Natural Language Processing, PyTorch, Transformers, and Deep Learning.",
+    "required_skills": [
+      "Python",
+      "Natural Language Processing",
+      "Deep Learning",
+      "PyTorch",
+      "Machine Learning",
+      "Scikit-Learn"
+    ]
+  },
+  {
+    "id": 11,
+    "title": "Mobile App Developer",
+    "domain": "Mobile Development",
+    "description": "Design and build high-performance mobile applications for iOS and Android. Proficient in Flutter, React Native, JavaScript or Swift/Kotlin, mobile UI/UX, and REST API integration.",
+    "required_skills": [
+      "React",
+      "JavaScript",
+      "Flutter",
+      "Mobile Development",
+      "Git",
+      "REST APIs"
+    ]
+  },
+  {
+    "id": 12,
+    "title": "Database Administrator",
+    "domain": "Database Engineering",
+    "description": "Manage, monitor, and optimize relational and distributed databases. Deep expertise in SQL query performance tuning, PostgreSQL, MySQL, database backup/recovery, data modeling, and security.",
+    "required_skills": [
+      "SQL",
+      "Database Administration",
+      "Data Analysis",
+      "Linux",
+      "Python"
+    ]
+  }
+]

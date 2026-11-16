@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ResumeScope - AI-Based Resume Screening & Job Role Recommendation</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <!-- App Container -->
+  <div class="app-container">
+
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+      <!-- Brand Logo -->
+      <div class="brand-container">
+        <div class="brand-icon">
+          <!-- Briefcase icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="3" ry="3"></rect>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+          </svg>
+        </div>
+        <span class="brand-name">ResumeScope</span>
+      </div>
+
+      <!-- Navigation Menu -->
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a class="nav-link active" data-view="view-home">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-view="view-results">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            <span>Results</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-view="view-analytics">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
+            <span>Analytics</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-view="view-history">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span>History</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-view="view-profile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>Profile</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-view="view-settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+            <span>Settings</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Sidebar Bottom Promo & Logout -->
+      <div class="sidebar-bottom">
+        <div class="sidebar-promo-card">
+          <div class="sidebar-promo-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          </div>
+          <div class="sidebar-promo-text">
+            <strong>Smarter Hiring.</strong>
+            <span>Brighter Future.</span>
+          </div>
+        </div>
+
+        <form class="logout-form" action="{{ url_for('logout_page') }}" method="post">
+          <button class="logout-link" type="submit">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          <span>Logout</span>
+          </button>
+        </form>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-wrapper">
+      
+      <!-- Top Header Bar -->
+      <header class="top-header">
+        <button class="header-action-btn" title="Notifications">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+          <span class="notif-dot"></span>
+        </button>
+
+        <div class="user-profile-menu" data-view="view-profile" onclick="document.querySelector('[data-view=\'view-profile\']').click()">
+          <div class="user-avatar-circle">{{ user.username[0]|upper }}</div>
+          <span class="user-name">{{ user.username }}</span>
+          <svg class="chevron-down-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </header>
+
+      <!-- ===================================================================
+           VIEW 1: HOME SCREEN
+           =================================================================== -->
+      <section id="view-home" class="view-section active-view">
+        <div class="home-hero-header">
+          <div class="ai-tag-pill">
+            <span>✦</span> AI-Powered Resume Screening
+          </div>
+          <h1 class="home-hero-title">
+            Find the Perfect Job Match <br>with <span class="gradient-text">ResumeScope</span>
+          </h1>
+          <p class="home-hero-subtitle">
+            Upload your resume and job description, and let our AI recommend the best job roles for you.
+          </p>
+        </div>
+
+        <!-- Hero Upload Area -->
+        <div class="upload-card-wrapper">
+          <div class="upload-controls-col">
+            <div class="upload-boxes-container">
+              <!-- Upload Resume Box -->
+              <input type="file" id="input-resume" accept=".pdf,.docx,.txt" style="display:none">
+              <div class="dropzone-box" id="dropzone-resume">
+                <div class="dropzone-icon-circle">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="12" y1="18" x2="12" y2="12"></line>
+                    <polyline points="9 15 12 12 15 15"></polyline>
+                  </svg>
+                </div>
+                <h4 class="dropzone-title">Upload Resume</h4>
+                <p class="dropzone-hint">PDF, DOCX or TXT</p>
+                <p class="dropzone-file-info" id="resume-file-info"></p>
+              </div>
+
+              <!-- Upload Job Description Box -->
+              <input type="file" id="input-jd" accept=".pdf,.docx,.txt" style="display:none">
+              <div class="dropzone-box" id="dropzone-jd">
+                <div class="dropzone-icon-circle">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                  </svg>
+                </div>
+                <h4 class="dropzone-title">Upload Job Description</h4>
+                <p class="dropzone-hint">PDF, DOCX or TXT (Optional)</p>
+                <p class="dropzone-file-info" id="jd-file-info"></p>
+              </div>
+            </div>
+
+            <!-- Analyze Button -->
+            <button class="btn-analyze-resume" id="btn-analyze-resume">
+              <span>Analyze Resume</span>
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+
+          <!-- 3D Graphic Area -->
+          <div class="upload-graphic-container">
+            <div class="illustration-bubble-bg"></div>
+            
+            <!-- Floating Resume Card -->
+            <div class="resume-3d-card">
+              <div class="r3d-avatar"></div>
+              <div class="r3d-line w-80 purple"></div>
+              <div class="r3d-line w-100"></div>
+              <div class="r3d-line w-60"></div>
+              <div class="r3d-line w-100"></div>
+              <div class="r3d-line w-40"></div>
+              <div class="r3d-line w-80"></div>
+            </div>
+
+            <!-- 3D Magnifier -->
+            <div class="magnifier-3d">
+              <svg viewBox="0 0 100 100" fill="none">
+                <!-- Lens Outer Ring -->
+                <circle cx="42" cy="42" r="30" stroke="#5f54f7" stroke-width="8" fill="#ffffff" fill-opacity="0.85"></circle>
+                <!-- Lens Inner Glow -->
+                <circle cx="42" cy="42" r="23" fill="url(#lensGradient)" fill-opacity="0.4"></circle>
+                <!-- Reflection Arc -->
+                <path d="M26 30 A18 18 0 0 1 50 24" stroke="#ffffff" stroke-width="3" stroke-linecap="round"></path>
+                <!-- Handle -->
+                <rect x="63" y="63" width="14" height="34" rx="7" transform="rotate(-45 63 63)" fill="#3e389e"></rect>
+                <defs>
+                  <linearGradient id="lensGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#8c52ff" />
+                    <stop offset="100%" stop-color="#5f54f7" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+
+            <!-- Sparkle Stars -->
+            <span class="sparkle-star s1">✦</span>
+            <span class="sparkle-star s2">✦</span>
+          </div>
+        </div>
+
+        <!-- Quick Stats & Recent Analyses -->
+        <div class="home-bottom-grid">
+          <!-- 4 Stat Pills -->
+          <div class="quick-stats-row">
+            <div class="stat-pill-card">
+              <div class="stat-pill-icon blue">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                </svg>
+              </div>
+              <div class="stat-pill-content">
+                <h4>10K+</h4>
+                <p>Jobs Analyzed</p>
+              </div>
+            </div>
+
+            <div class="stat-pill-card">
+              <div class="stat-pill-icon indigo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <div class="stat-pill-content">
+                <h4>95%+</h4>
+                <p>Matching Accuracy</p>
+              </div>
+            </div>
+
+            <div class="stat-pill-card">
+              <div class="stat-pill-icon purple">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+              </div>
+              <div class="stat-pill-content">
+                <h4>2x</h4>
+                <p>Faster Screening</p>
+              </div>
+            </div>
+
+            <div class="stat-pill-card">
+              <div class="stat-pill-icon green">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              </div>
+              <div class="stat-pill-content">
+                <h4>Your Data</h4>
+                <p>Stays Private</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Analyses Card -->
+          <div class="recent-analyses-card">
+            <div class="recent-analyses-header">
+              <h4>Recent Analyses</h4>
+              <a class="view-all-link">View All →</a>
+            </div>
+            <div id="home-recent-list">
+              <div class="recent-analysis-row">
+                <div class="recent-analysis-meta">
+                  <svg class="recent-file-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                  </svg>
+                  <div>
+                    <div class="recent-file-title">Resume_JohnDoe.pdf</div>
+                    <div class="recent-file-time">Oct 28, 2025 · ML Engineer</div>
+                  </div>
+                </div>
+                <span class="badge-match-score">96.2%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           VIEW 2: ANALYZING / PROCESSING VIEW ("Analyzing Your Resume...")
+           =================================================================== -->
+      <section id="view-analyzing" class="view-section">
+        <div class="analyzing-container">
+          <div class="analyzing-header">
+            <h1 class="analyzing-title">Analyzing Your Resume...</h1>
+            <p class="analyzing-subtitle">Our AI is processing your files. This may take a few moments.</p>
+          </div>
+
+          <!-- Horizontal Stepper -->
+          <div class="stepper-container">
+            <!-- Step 1 -->
+            <div class="step-node completed">
+              <div class="step-icon-circle">✓</div>
+              <span class="step-label">Extracting Text</span>
+            </div>
+            <div class="stepper-line completed"></div>
+
+            <!-- Step 2 -->
+            <div class="step-node completed">
+              <div class="step-icon-circle">✓</div>
+              <span class="step-label">Analyzing Skills</span>
+            </div>
+            <div class="stepper-line completed"></div>
+
+            <!-- Step 3 -->
+            <div class="step-node active">
+              <div class="step-icon-circle">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+              </div>
+              <span class="step-label">Matching Profiles</span>
+            </div>
+            <div class="stepper-line"></div>
+
+            <!-- Step 4 -->
+            <div class="step-node pending">
+              <div class="step-icon-circle">4</div>
+              <span class="step-label">Generating Report</span>
+            </div>
+            <div class="stepper-line"></div>
+
+            <!-- Step 5 -->
+            <div class="step-node pending">
+              <div class="step-icon-circle">5</div>
+              <span class="step-label">Finalizing</span>
+            </div>
+          </div>
+
+          <!-- Circular Radial Progress (78%) -->
+          <div class="gauge-wrapper">
+            <svg class="gauge-svg" viewBox="0 0 180 180">
+              <defs>
+                <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#5f54f7" />
+                  <stop offset="100%" stop-color="#a855f7" />
+                </linearGradient>
+              </defs>
+              <circle class="gauge-bg-circle" cx="90" cy="90" r="75"></circle>
+              <circle class="gauge-progress-circle" cx="90" cy="90" r="75"></circle>
+            </svg>
+            <div class="gauge-content">
+              <div class="gauge-percentage">78%</div>
+              <div class="gauge-subtext">✦ Almost there!</div>
+            </div>
+          </div>
+
+          <!-- Bottom Notice -->
+          <div class="analyzing-callout-pill">
+            <span>💡</span> Matching your skills with the best job opportunities...
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           VIEW 3: RESULTS SCREEN ("Top 3 Job Recommendations")
+           =================================================================== -->
+      <section id="view-results" class="view-section">
+        <!-- Results Header -->
+        <div class="results-header-row">
+          <div class="results-header-left">
+            <h2>
+              <span>🏆</span> Top 3 Job Recommendations
+            </h2>
+            <p>Based on your resume and job description</p>
+          </div>
+          <button class="btn-download-report">
+            <span>Download Report</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+          </button>
+        </div>
+
+        <!-- 3 Job Cards Grid -->
+        <div class="job-recommendations-grid">
+          <!-- Card 1: Machine Learning Engineer -->
+          <div class="job-card">
+            <div class="job-card-top">
+              <div class="job-rank-badge rank-1">1</div>
+              <span class="job-score-pill purple">96.2%</span>
+            </div>
+            <h3 class="job-card-title">Machine Learning Engineer</h3>
+            <p class="job-card-desc">Build and develop ML models for real-world applications.</p>
+            <div class="job-skills-tags">
+              <span class="skill-tag-pill">Python</span>
+              <span class="skill-tag-pill">Machine Learning</span>
+              <span class="skill-tag-pill">Data Science</span>
+            </div>
+            <a class="job-card-action">View Details →</a>
+          </div>
+
+          <!-- Card 2: Data Scientist -->
+          <div class="job-card">
+            <div class="job-card-top">
+              <div class="job-rank-badge rank-2">2</div>
+              <span class="job-score-pill blue">93.7%</span>
+            </div>
+            <h3 class="job-card-title">Data Scientist</h3>
+            <p class="job-card-desc">Analyze data and build predictive models.</p>
+            <div class="job-skills-tags">
+              <span class="skill-tag-pill">Python</span>
+              <span class="skill-tag-pill">Data Analysis</span>
+              <span class="skill-tag-pill">Statistics</span>
+            </div>
+            <a class="job-card-action">View Details →</a>
+          </div>
+
+          <!-- Card 3: Data Analyst -->
+          <div class="job-card">
+            <div class="job-card-top">
+              <div class="job-rank-badge rank-3">3</div>
+              <span class="job-score-pill indigo">90.5%</span>
+            </div>
+            <h3 class="job-card-title">Data Analyst</h3>
+            <p class="job-card-desc">Extract insights from data and drive decisions.</p>
+            <div class="job-skills-tags">
+              <span class="skill-tag-pill">SQL</span>
+              <span class="skill-tag-pill">Data Visualization</span>
+              <span class="skill-tag-pill">Analytics</span>
+            </div>
+            <a class="job-card-action">View Details →</a>
+          </div>
+        </div>
+
+        <!-- Lower Section: Breakdown, Matched Skills, Gap Analysis -->
+        <div class="results-bottom-grid">
+          <!-- Card A: Match Score Breakdown -->
+          <div class="result-detail-card">
+            <h4 class="result-card-heading">Match Score Breakdown</h4>
+            
+            <div class="donut-chart-container">
+              <div class="donut-svg-wrap">
+                <svg viewBox="0 0 100 100">
+                  <!-- 40% Semantic Similarity (Light Blue) -->
+                  <circle cx="50" cy="50" r="38" fill="none" stroke="#38bdf8" stroke-width="12" stroke-dasharray="238.7" stroke-dashoffset="0"></circle>
+                  <!-- 60% Skill Match (Purple) -->
+                  <circle cx="50" cy="50" r="38" fill="none" stroke="#5f54f7" stroke-width="12" stroke-dasharray="238.7" stroke-dashoffset="95.5"></circle>
+                </svg>
+                <div class="donut-center-text">
+                  <div class="donut-big-val">92.8%</div>
+                  <div class="donut-label">Overall Match</div>
+                </div>
+              </div>
+
+              <div class="donut-legend">
+                <div class="legend-item">
+                  <span><span class="legend-dot skill"></span>Skill Match</span>
+                  <span class="legend-percent">60%</span>
+                </div>
+                <div class="legend-item">
+                  <span><span class="legend-dot semantic"></span>Semantic Similarity</span>
+                  <span class="legend-percent">40%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="breakdown-note">
+              💡 You have strong skills in Python, Machine Learning and Data Analysis! 🚀
+            </div>
+          </div>
+
+          <!-- Card B: Matched Skills -->
+          <div class="result-detail-card">
+            <h4 class="result-card-heading">
+              <span>Matched Skills</span>
+            </h4>
+            <div class="skills-badge-list">
+              <span class="badge-matched-skill">Python</span>
+              <span class="badge-matched-skill">Machine Learning</span>
+              <span class="badge-matched-skill">Data Analysis</span>
+              <span class="badge-matched-skill more-pill">+5 more</span>
+            </div>
+          </div>
+
+          <!-- Card C: Skill Gap Analysis -->
+          <div class="result-detail-card">
+            <h4 class="result-card-heading">Skill Gap Analysis</h4>
+            <div class="skill-gap-alert">
+              <span>⚠️</span> 3 skills not detected
+            </div>
+            <div class="skills-badge-list">
+              <span class="badge-missing-skill">Deep Learning</span>
+              <span class="badge-missing-skill">Big Data</span>
+              <span class="badge-missing-skill">Spark</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detailed Match Report Box (from img1) -->
+        <div id="detailed-match-report-modal" class="result-detail-card" style="margin-top: 20px;">
+          <div class="results-header-row" style="margin-bottom: 16px;">
+            <h4 class="result-card-heading" style="margin-bottom: 0;">Detailed Match Report</h4>
+            <button class="btn-download-report">
+              <span>Download Report</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+            </button>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px;">
+            <div>
+              <p style="font-size: 12px; font-weight: 700; color: #059669; margin-bottom: 8px;">✓ Matched Skills</p>
+              <div class="skills-badge-list">
+                <span class="badge-matched-skill">Python</span>
+                <span class="badge-matched-skill">Machine Learning</span>
+                <span class="badge-matched-skill">Data Analysis</span>
+                <span class="badge-matched-skill">Statistics</span>
+              </div>
+            </div>
+            <div>
+              <p style="font-size: 12px; font-weight: 700; color: #2563eb; margin-bottom: 8px;">✓ Synonym Matched</p>
+              <div class="skills-badge-list">
+                <span class="badge-matched-skill" style="background:#dbeafe; color:#1d4ed8;">ML</span>
+                <span class="badge-matched-skill" style="background:#dbeafe; color:#1d4ed8;">Data Science</span>
+                <span class="badge-matched-skill" style="background:#dbeafe; color:#1d4ed8;">Analytics</span>
+              </div>
+            </div>
+            <div>
+              <p style="font-size: 12px; font-weight: 700; color: #d97706; margin-bottom: 8px;">▲ Skills Not Detected</p>
+              <div class="skills-badge-list">
+                <span class="badge-missing-skill">Deep Learning</span>
+                <span class="badge-missing-skill">Big Data</span>
+                <span class="badge-missing-skill">Cloud Computing</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="background: #f8fafc; padding: 12px 16px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between;">
+            <div>
+              <span style="font-size: 12.5px; font-weight: 700; color: var(--text-primary);">Skill Gap Analysis: </span>
+              <span style="font-size: 12px; color: var(--text-secondary);">Consider adding these skills to improve your match score.</span>
+            </div>
+            <a style="font-size: 12px; font-weight: 700; color: var(--purple-primary); cursor: pointer;">Learn More →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           VIEW 4: PERFORMANCE ANALYTICS SCREEN
+           =================================================================== -->
+      <section id="view-analytics" class="view-section">
+        <!-- Analytics Header -->
+        <div class="analytics-header-row">
+          <div class="analytics-header-left">
+            <h2>
+              <span>📊</span> Performance Analytics
+            </h2>
+            <p>Compare our approach with popular baselines</p>
+          </div>
+          <!-- Time Filters -->
+          <div class="time-filter-pills">
+            <button class="time-pill-btn">7D</button>
+            <button class="time-pill-btn active">30D</button>
+            <button class="time-pill-btn">90D</button>
+            <button class="time-pill-btn">All</button>
+          </div>
+        </div>
+
+        <!-- 4 KPI Metrics -->
+        <div class="kpi-cards-grid">
+          <div class="kpi-card">
+            <div class="kpi-icon-circle amber">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="8" r="7"></circle>
+                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+              </svg>
+            </div>
+            <div class="kpi-meta">
+              <p>Top-3 Accuracy</p>
+              <h3>94.5%</h3>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon-circle blue">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="12" r="6"></circle>
+                <circle cx="12" cy="12" r="2"></circle>
+              </svg>
+            </div>
+            <div class="kpi-meta">
+              <p>Precision</p>
+              <h3>92.1%</h3>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon-circle green">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 4 23 10 17 10"></polyline>
+                <polyline points="1 20 1 14 7 14"></polyline>
+                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+              </svg>
+            </div>
+            <div class="kpi-meta">
+              <p>Recall</p>
+              <h3>90.3%</h3>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon-circle purple">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="20" x2="18" y2="10"></line>
+                <line x1="12" y1="20" x2="12" y2="4"></line>
+                <line x1="6" y1="20" x2="6" y2="14"></line>
+              </svg>
+            </div>
+            <div class="kpi-meta">
+              <p>F1-Score</p>
+              <h3>91.2%</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Analytics Grid -->
+        <div class="analytics-main-grid">
+          <!-- Model Comparison Grouped Bar Chart -->
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3>Model Comparison</h3>
+              <div class="chart-legend">
+                <span><span class="c-dot precision"></span>Precision</span>
+                <span><span class="c-dot recall"></span>Recall</span>
+                <span><span class="c-dot f1"></span>F1-Score</span>
+              </div>
+            </div>
+
+            <div class="chart-body-wrapper">
+              <!-- Y-Axis Values -->
+              <div class="chart-y-axis">
+                <span>100</span>
+                <span>75</span>
+                <span>50</span>
+                <span>25</span>
+                <span>0</span>
+              </div>
+
+              <!-- Grid lines -->
+              <div class="chart-grid-lines">
+                <div class="grid-line"></div>
+                <div class="grid-line"></div>
+                <div class="grid-line"></div>
+                <div class="grid-line"></div>
+                <div class="grid-line"></div>
+              </div>
+
+              <!-- 4 Groups of Bars -->
+              <div class="bar-groups-container">
+                <!-- Group 1: Keyword Overlap -->
+                <div class="bar-group">
+                  <div class="bars-cluster">
+                    <div class="bar p" style="height: 58%;" data-val="58%"></div>
+                    <div class="bar r" style="height: 62%;" data-val="62%"></div>
+                    <div class="bar f" style="height: 60%;" data-val="60%"></div>
+                  </div>
+                  <span class="bar-group-label">Keyword Overlap</span>
+                </div>
+
+                <!-- Group 2: TF-IDF -->
+                <div class="bar-group">
+                  <div class="bars-cluster">
+                    <div class="bar p" style="height: 72%;" data-val="72%"></div>
+                    <div class="bar r" style="height: 75%;" data-val="75%"></div>
+                    <div class="bar f" style="height: 73.5%;" data-val="73.5%"></div>
+                  </div>
+                  <span class="bar-group-label">TF-IDF</span>
+                </div>
+
+                <!-- Group 3: Sentence-BERT -->
+                <div class="bar-group">
+                  <div class="bars-cluster">
+                    <div class="bar p" style="height: 82%;" data-val="82%"></div>
+                    <div class="bar r" style="height: 79%;" data-val="79%"></div>
+                    <div class="bar f" style="height: 80.5%;" data-val="80.5%"></div>
+                  </div>
+                  <span class="bar-group-label">Sentence-BERT</span>
+                </div>
+
+                <!-- Group 4: Hybrid (Proposed) -->
+                <div class="bar-group">
+                  <div class="bars-cluster">
+                    <div class="bar p" style="height: 92.1%;" data-val="92.1%"></div>
+                    <div class="bar r" style="height: 90.3%;" data-val="90.3%"></div>
+                    <div class="bar f" style="height: 91.2%;" data-val="91.2%"></div>
+                  </div>
+                  <span class="bar-group-label" style="font-weight: 700; color: var(--purple-primary);">Hybrid (Proposed)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Insights Card -->
+          <div class="insights-card">
+            <h3>Insights</h3>
+            <div class="insight-bullets-list">
+              <div class="insight-bullet-item">
+                <div class="insight-check-circle">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
+                <p class="insight-text">Hybrid approach improved accuracy by 8.7%</p>
+              </div>
+
+              <div class="insight-bullet-item">
+                <div class="insight-check-circle">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
+                <p class="insight-text">Semantic matching helps recognize skill variations</p>
+              </div>
+
+              <div class="insight-bullet-item">
+                <div class="insight-check-circle">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
+                <p class="insight-text">Balanced performance across job domains</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           VIEW 5: YOUR ANALYSIS HISTORY SCREEN
+           =================================================================== -->
+      <section id="view-history" class="view-section">
+        <div class="history-card">
+          <div class="history-header-row">
+            <div class="history-title-group">
+              <h2>Your Analysis History</h2>
+              <p>View and manage your previous analyses</p>
+            </div>
+            
+            <div class="history-actions-group">
+              <div class="search-input-wrap">
+                <svg class="search-icon-pos" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="history-search-input" placeholder="Search by filename...">
+              </div>
+              <button class="btn-clear-history">Clear History</button>
+            </div>
+          </div>
+
+          <!-- History Table -->
+          <table class="history-table">
+            <thead>
+              <tr>
+                <th>Resume Name</th>
+                <th>Job Role</th>
+                <th>Date</th>
+                <th>Match Score</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="resume-name-cell">
+                    <svg class="table-doc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                      <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                    <span>Resume_JohnDoe.pdf</span>
+                  </div>
+                </td>
+                <td>ML Engineer</td>
+                <td>Oct 28, 2025</td>
+                <td><span class="badge-match-score">96.2%</span></td>
+                <td>
+                  <div class="table-actions-cell">
+                    <button class="table-action-icon-btn" title="View Details" onclick="document.querySelector('[data-view=\'view-results\']').click()">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                      </svg>
+                    </button>
+                    <button class="table-action-icon-btn delete" title="Delete">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="resume-name-cell">
+                    <svg class="table-doc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                      <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                    <span>Resume_Anika.pdf</span>
+                  </div>
+                </td>
+                <td>Data Scientist</td>
+                <td>Oct 25, 2025</td>
+                <td><span class="badge-match-score">93.7%</span></td>
+                <td>
+                  <div class="table-actions-cell">
+                    <button class="table-action-icon-btn" title="View Details" onclick="document.querySelector('[data-view=\'view-results\']').click()">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                      </svg>
+                    </button>
+                    <button class="table-action-icon-btn delete" title="Delete">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="resume-name-cell">
+                    <svg class="table-doc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                      <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                    <span>Resume_Madhu.pdf</span>
+                  </div>
+                </td>
+                <td>Data Analyst</td>
+                <td>Oct 20, 2025</td>
+                <td><span class="badge-match-score">90.5%</span></td>
+                <td>
+                  <div class="table-actions-cell">
+                    <button class="table-action-icon-btn" title="View Details" onclick="document.querySelector('[data-view=\'view-results\']').click()">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                      </svg>
+                    </button>
+                    <button class="table-action-icon-btn delete" title="Delete">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Pagination -->
+          <div class="pagination-container">
+            <button class="page-btn">&lt;</button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">&gt;</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           VIEW 6: PROFILE SCREEN ("My Profile")
+           =================================================================== -->
+      <section id="view-profile" class="view-section">
+        <div class="profile-settings-grid">
+          <div class="settings-card-panel">
+            <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 4px;">My Profile</h2>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 24px;">Manage your account details</p>
+            
+            <div class="profile-avatar-block">
+              <div class="profile-big-avatar">
+                <span>{{ user.username[0]|upper }}</span>
+                <div class="avatar-edit-badge">
+                  <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                  </svg>
+                </div>
+              </div>
+              <h3>{{ user.username }}</h3>
+              <p>{{ user.email }}</p>
+              <button class="btn-edit-profile">Edit Profile</button>
+            </div>
+
+            <div class="account-fields-form">
+              <div class="form-group-item">
+                <label>Full Name</label>
+                <input type="text" value="{{ user.username }}" readonly>
+              </div>
+              <div class="form-group-item">
+                <label>Email Address</label>
+                <input type="email" value="{{ user.email }}" readonly>
+              </div>
+              <div class="form-group-item">
+                <label>Member Since</label>
+                <input type="text" value="Oct 2025" readonly>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-card-panel">
+            <div class="preferences-block">
+              <h4>Preferences</h4>
+              <div class="toggle-setting-row">
+                <div class="toggle-label-group">
+                  <h5>Enable AI Insights</h5>
+                  <p>Get AI-powered skill improvement suggestions</p>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="toggle-setting-row">
+                <div class="toggle-label-group">
+                  <h5>Email Notifications</h5>
+                  <p>Receive weekly summary and match reports</p>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="toggle-setting-row">
+                <div class="toggle-label-group">
+                  <h5>Dark Mode</h5>
+                  <p>Toggle dark and light visual appearance</p>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="profile-darkmode-toggle">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           VIEW 7: SETTINGS SCREEN ("Settings")
+           =================================================================== -->
+      <section id="view-settings" class="view-section">
+        <div class="settings-card-panel" style="max-width: 800px;">
+          <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 4px;">Settings</h2>
+          <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 24px;">Customize your experience</p>
+
+          <div class="toggle-setting-row">
+            <div class="toggle-label-group">
+              <h5>Privacy Settings</h5>
+              <p>Manage your data and privacy preferences</p>
+            </div>
+            <button class="settings-btn-action">Manage</button>
+          </div>
+
+          <div class="toggle-setting-row">
+            <div class="toggle-label-group">
+              <h5>PII Masking</h5>
+              <p>Control how personal information is handled</p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="toggle-setting-row">
+            <div class="toggle-label-group">
+              <h5>Data Deletion</h5>
+              <p>Delete your data permanently</p>
+            </div>
+            <button class="settings-btn-action danger">Delete Data</button>
+          </div>
+
+          <div class="toggle-setting-row" style="border-bottom: none;">
+            <div class="toggle-label-group">
+              <h5>Appearance</h5>
+              <p>Theme</p>
+            </div>
+            <div class="theme-segmented-ctrl">
+              <button class="theme-opt-btn active" data-theme="light">Light</button>
+              <button class="theme-opt-btn" data-theme="dark">Dark</button>
+              <button class="theme-opt-btn" data-theme="system">System</button>
+            </div>
+          </div>
+
+          <div class="about-resumescope-box">
+            <h5>About ResumeScope</h5>
+            <p>AI-powered resume screening and job recommendation system. Version 1.0.0</p>
+            <button class="btn-contact-support">Contact Support</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Persistent Bottom Features Strip (from img1.png) -->
+  <footer class="bottom-features-strip">
+    <div class="strip-left-items">
+      <span class="strip-item-feature">⭐ Key Features:</span>
+      <span class="strip-divider">|</span>
+      <span class="strip-item-feature">📥 Smart Upload</span>
+      <span class="strip-divider">|</span>
+      <span class="strip-item-feature">🤖 AI-Powered Matching</span>
+      <span class="strip-divider">|</span>
+      <span class="strip-item-feature">📝 Explainable Results</span>
+      <span class="strip-divider">|</span>
+      <span class="strip-item-feature">🎯 Skill Gap Analysis</span>
+      <span class="strip-divider">|</span>
+      <span class="strip-item-feature">📈 Advanced Analytics</span>
+      <span class="strip-divider">|</span>
+      <span class="strip-item-feature">🛡️ Secure & Private</span>
+    </div>
+    <div class="strip-right-slogan">
+      <span>✦</span> Smarter Matching. Better Opportunities.
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
+
