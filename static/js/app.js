@@ -416,6 +416,52 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
+    const learningResourcesList = document.getElementById('learning-resources-list');
+    if (learningResourcesList) {
+      learningResourcesList.innerHTML = '';
+      const learningResources = job.learning_resources || [];
+      if (learningResources.length === 0) {
+        const emptyState = document.createElement('p');
+        emptyState.className = 'learning-resources-empty';
+        emptyState.textContent = 'No skill gaps were identified for this role.';
+        learningResourcesList.appendChild(emptyState);
+      } else {
+        learningResources.forEach(skillResources => {
+          const skillGroup = document.createElement('div');
+          skillGroup.className = 'learning-skill-group';
+
+          const skillHeading = document.createElement('h5');
+          skillHeading.className = 'learning-skill-heading';
+          skillHeading.textContent = skillResources.skill;
+          skillGroup.appendChild(skillHeading);
+
+          const courseLinks = document.createElement('div');
+          courseLinks.className = 'learning-course-links';
+          (skillResources.courses || []).forEach(course => {
+            const link = document.createElement('a');
+            link.className = 'learning-course-link';
+            link.href = course.url;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.setAttribute('aria-label', `${course.label} for ${skillResources.skill} on ${course.provider}`);
+
+            const label = document.createElement('span');
+            label.className = 'learning-course-label';
+            label.textContent = course.label;
+
+            const provider = document.createElement('span');
+            provider.className = 'learning-course-provider';
+            provider.textContent = course.provider;
+
+            link.append(label, provider);
+            courseLinks.appendChild(link);
+          });
+          skillGroup.appendChild(courseLinks);
+          learningResourcesList.appendChild(skillGroup);
+        });
+      }
+    }
+
     // Detailed Match Report Modal Section
     const detMatched = document.querySelector('#detailed-match-report-modal .skills-badge-list');
     if (detMatched) {

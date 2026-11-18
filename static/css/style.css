@@ -1112,6 +1112,76 @@ body {
   gap: 18px;
 }
 
+.learning-resources-card {
+  margin-top: 18px;
+}
+
+.learning-resources-header {
+  margin-bottom: 16px;
+}
+
+.learning-resources-header .result-card-heading {
+  margin-bottom: 4px;
+}
+
+.learning-resources-note,
+.learning-resources-empty {
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.learning-resources-list {
+  display: grid;
+  gap: 14px;
+}
+
+.learning-skill-group {
+  display: grid;
+  grid-template-columns: minmax(120px, 0.6fr) 2fr;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+}
+
+.learning-skill-heading {
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.learning-course-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.learning-course-link {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 170px;
+  padding: 9px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--purple-light);
+  color: var(--purple-primary);
+  text-decoration: none;
+}
+
+.learning-course-link:hover {
+  background: var(--purple-primary);
+  color: #ffffff;
+}
+
+.learning-course-label {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.learning-course-provider {
+  font-size: 11px;
+}
+
 .result-detail-card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
@@ -2087,6 +2157,10 @@ input:checked+.slider:before {
   }
 
   .results-bottom-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .learning-skill-group {
     grid-template-columns: 1fr;
   }
 

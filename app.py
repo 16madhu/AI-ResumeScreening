@@ -66,6 +66,7 @@ from backend.database import (
 from backend.text_extractor import extract_text, clean_text
 from backend.pii_masker import mask_pii
 from backend.skill_extractor import SkillExtractor
+from backend.learning_resources import get_learning_resources
 from backend.semantic_matcher import SemanticMatcher
 from backend.hybrid_matcher import HybridMatcher
 from backend.fairness import FairnessSensitivityChecker
@@ -416,6 +417,10 @@ def analyze_resume():
     ranking_results = hybrid_engine.rank_jobs(masked_text, jobs, top_n=3)
 
     top_recs = ranking_results["top_recommendations"]
+    for recommendation in top_recs:
+        recommendation["learning_resources"] = get_learning_resources(
+            recommendation.get("skills_not_detected", [])
+        )
     top_role_title = top_recs[0]["job_title"] if top_recs else "No Match"
     top_score = top_recs[0]["final_hybrid_score"] if top_recs else 0.0
 
